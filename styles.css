@@ -20,6 +20,24 @@ body {
   overflow: hidden;
 }
 
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 6;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10vh;
+  width: 10px;
+  height: 18px;
+  border-radius: 2px;
+  animation: fall linear forwards;
+  opacity: 0.95;
+}
+
 .loading-screen {
   position: fixed;
   inset: 0;
@@ -139,9 +157,18 @@ h1 span {
 
 .buttons {
   margin-top: 1.6rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
 }
 
-.buttons a {
+.buttons.secondary {
+  margin-top: 1rem;
+}
+
+.buttons a,
+.action-btn {
   display: inline-block;
   padding: 0.9rem 1.4rem;
   border-radius: 999px;
@@ -150,11 +177,35 @@ h1 span {
   text-decoration: none;
   font-weight: 700;
   box-shadow: 0 10px 25px rgba(255, 95, 162, 0.3);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
-.buttons a:hover {
+.buttons a:hover,
+.action-btn:hover {
   transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(255, 95, 162, 0.34);
+}
+
+.action-btn.accent {
+  background: linear-gradient(90deg, #ff8fab, #ffe180);
+}
+
+.surprise-box {
+  margin: 1.2rem auto 0;
+  padding: 1rem 1.2rem;
+  max-width: 520px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255,255,255,0.2);
+  animation: popIn 0.5s ease;
+}
+
+.surprise-box p {
+  margin: 0;
+  line-height: 1.7;
 }
 
 .heart-heart {
@@ -198,4 +249,14 @@ h1 span {
 @keyframes floatHeart {
   0%, 100% { transform: rotate(45deg) translateY(0); }
   50% { transform: rotate(45deg) translateY(-8px); }
+}
+
+@keyframes fall {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0.95; }
+  100% { transform: translate3d(var(--drift-x), 110vh, 0) rotate(720deg); opacity: 0; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
