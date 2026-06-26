@@ -31,7 +31,7 @@ function initAudio() {
   audioState.gainNode.connect(audioState.context.destination);
 }
 
-function playTone(freq, duration, type = 'sine', time = audioState.context.currentTime, gain = 0.03) {
+function playTone(freq, duration, type = 'triangle', time = audioState.context.currentTime, gain = 0.03) {
   const oscillator = audioState.context.createOscillator();
   const gainNode = audioState.context.createGain();
 
@@ -48,11 +48,11 @@ function playTone(freq, duration, type = 'sine', time = audioState.context.curre
 }
 
 function playSequence() {
-  const melody = [261.63, 329.63, 392.0, 523.25, 392.0, 329.63, 293.66];
+  const melody = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63, 261.63, 261.63, 293.66, 261.63, 392.0, 349.23];
   melody.forEach((note, index) => {
-    const time = audioState.context.currentTime + index * 0.24;
+    const time = audioState.context.currentTime + index * 0.25;
     const type = index % 2 === 0 ? 'triangle' : 'sine';
-    playTone(note, 0.2, type, time, 0.025);
+    playTone(note, 0.22, type, time, 0.025);
   });
 }
 
@@ -69,7 +69,7 @@ function startMusic() {
   playSequence();
   audioState.timer = window.setInterval(() => {
     playSequence();
-  }, 1800);
+  }, 3200);
 }
 
 function stopMusic() {
