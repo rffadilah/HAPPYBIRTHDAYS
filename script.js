@@ -6,10 +6,11 @@ window.addEventListener('load', () => {
     loadingScreen.classList.add('hidden');
     card.classList.add('show');
   }, 2400);
+
+  startMusic();
+  burstConfetti();
 });
 
-const musicToggle = document.getElementById('musicToggle');
-const surpriseBtn = document.getElementById('surpriseBtn');
 const surpriseBox = document.getElementById('surpriseBox');
 const confettiLayer = document.getElementById('confettiLayer');
 
@@ -64,7 +65,6 @@ function startMusic() {
   if (audioState.playing) return;
 
   audioState.playing = true;
-  musicToggle.textContent = '🔇 Stop Musik';
 
   playSequence();
   audioState.timer = window.setInterval(() => {
@@ -77,7 +77,6 @@ function stopMusic() {
 
   window.clearInterval(audioState.timer);
   audioState.playing = false;
-  musicToggle.textContent = '🎵 Putar Musik';
 }
 
 function burstConfetti() {
@@ -97,18 +96,4 @@ function burstConfetti() {
   }
 }
 
-musicToggle.addEventListener('click', () => {
-  if (audioState.playing) {
-    stopMusic();
-  } else {
-    startMusic();
-  }
-});
-
-surpriseBtn.addEventListener('click', () => {
-  surpriseBox.hidden = false;
-  burstConfetti();
-  if (!audioState.playing) {
-    startMusic();
-  }
-});
+surpriseBox.hidden = false;
