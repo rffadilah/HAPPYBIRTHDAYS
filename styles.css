@@ -170,7 +170,7 @@ h1 span {
 
 .buttons a,
 .action-btn {
-  display: inline-block;
+  display: none !important;
   padding: 0.8rem 1.1rem;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--pink), var(--gold));
